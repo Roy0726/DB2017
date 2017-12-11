@@ -6,11 +6,20 @@
 <%@page import="DB.DB_Control"%>
 <%@ page language="java" import="java.sql.*"%>
 <%
+	String c1 = (String)session.getAttribute("c1");
+	String c2 = (String)session.getAttribute("c2");
+	String c3 = (String)session.getAttribute("c3");
+	
+	String s1 = (String)session.getAttribute("s1");
+	String s2 = (String)session.getAttribute("s2");
 	ResultSet main_rs = (ResultSet)session.getAttribute("main_rs");
-	System.out.println(main_rs);
+	//System.out.println(c1 + c2 + c3);
+	System.out.println(c1 + c2 + c3 + "//" + s1+s2);
 %>
 
+
 <!DOCTYPE html>
+
 <html>
 <title>경북대학교 수강신청 도우미</title>
 <meta charset="UTF-8">
@@ -95,11 +104,11 @@ html,body{width:100%; height : 100%},h1,h2,h3,h4,h5 {font-family: "Open Sans", s
 			<h4 class="w3-opacity">강의계획서</h4>
 			<div>
 				<div class="bbs_info">
-				<form action="main_table.jsp">
+				<form action="main_table.jsp" method = "post">
 					<div class="search" style="float:left; width: 100%;">			
 						검색조건 :  
 						<!--옵션을 어케 둘것인가?-->
-						<select id="sub02" class="sub">
+						<select id="sub01" class="sub" name = "sub01">
 							<option value="11">인문대학</option>
 							<option value="12">사회과학대학</option>
 							<option value="13">자연과학대학</option>
@@ -109,47 +118,47 @@ html,body{width:100%; height : 100%},h1,h2,h3,h4,h5 {font-family: "Open Sans", s
 							<option value="17">농업생명과학대학</option>
 							<option value="19">사범대학</option>
 							<option value="18">예술대학</option>
-							<option value="1F">의과대학</option>
-							<option value="1G">치과대학</option>
-							<option value="1A">수의과대학</option>
-							<option value="1B">생활과학대학</option>
-							<option value="1E">자율전공부</option>
-							<option value="1D">전자전기컴퓨터학부</option>
-							<option value="1C">간호대학</option>
-							<option value="1O">IT대학</option>
-							<option value="1P">글로벌인재학부</option>
-							<option value="1Q">약학대학</option>
-							<option value="1R">에너지공학부</option>
-							<option value="1S">행정학부</option>
+							<option value="20">의과대학</option>
+							<option value="21">치과대학</option>
+							<option value="22">수의과대학</option>
+							<option value="23">생활과학대학</option>
+							<option value="24">자율전공부</option>
+							<option value="25">전자전기컴퓨터학부</option>
+							<option value="26">간호대학</option>
+							<option value="27">IT대학</option>
+							<option value="28">글로벌인재학부</option>
+							<option value="29">약학대학</option>
+							<option value="30">에너지공학부</option>
+							<option value="31">행정학부</option>
 							<option value="">==상주캠퍼스==</option>
-							<option value="1L">생태환경대학</option>
-							<option value="1N">이공대학</option>
-							<option value="1U">과학기술대학</option>
-							<option value="1M">보건복지학부</option>
-							<option value="1V">축산대학</option>
-							<option value="1W">과학기술생명자원자율학부</option>
+							<option value="32">생태환경대학</option>
+							<option value="33">이공대학</option>
+							<option value="34">과학기술대학</option>
+							<option value="35">보건복지학부</option>
+							<option value="36">축산대학</option>
+							<option value="37">과학기술생명자원자율학부</option>
 						</select>
-						<select id="sub03" class="sub">
-							<option value="211"></option>
-							<option value="CSE">컴퓨터학부</option>
-							<option value="223">컴퓨터학부 글로벌소프트웨어학과</option>
-							<option value="224">전기공학과</option>
-							<option value="225">전자공학부 A</option>
-							<option value="226">전자공학부 B</option>
-							<option value="228">전자공학부 C</option>
-							<option value="22G">전자공학부 D</option>
-							<option value="229">전자공학부 E</option>
-							<option value="22A">전자공학부 F</option>
-							<option value="23D">전자공학부 모바일전공</option>
-							<option value="22F">건설IT전공</option>
-							<option value="22F">빅데이터전공</option>
+						<select id="sub02" class="sub" name = "sub02">
+							<option value="11"></option>
+							<option value="12">컴퓨터학부</option>
+							<option value="13">컴퓨터학부 글로벌소프트웨어학과</option>
+							<option value="14">전기공학과</option>
+							<option value="15">전자공학부 A</option>
+							<option value="16">전자공학부 B</option>
+							<option value="17">전자공학부 C</option>
+							<option value="18">전자공학부 D</option>
+							<option value="19">전자공학부 E</option>
+							<option value="20">전자공학부 F</option>
+							<option value="21">전자공학부 모바일전공</option>
+							<option value="22">건설IT전공</option>
+							<option value="23">빅데이터전공</option>
 						</select>
 				</div>
 			</div>
 
-			<input type="checkbox" name = "one" value = "lee">  one 
-			<input type="checkbox" name = "two" value = "na"> two 
-			<input type="checkbox" name = "three" value> three <br>
+			<input type="checkbox" name = "one" value = "temp1" <%if(c1 != null) out.print("checked=\"checked\""); %>>  one 
+			<input type="checkbox" name = "two" value = "temp2" <%if(c2 != null) out.print("checked=\"checked\""); %>> two 
+			<input type="checkbox" name = "three" value = "temp3" <%if(c3 != null) out.print("checked=\"checked\""); %>> three <br>
 			<button type="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i> 조회</button> 
 				</form>
 			</div>
@@ -166,7 +175,27 @@ html,body{width:100%; height : 100%},h1,h2,h3,h4,h5 {font-family: "Open Sans", s
 	<div id="locator_cour" style="width:75%;"></div>
 	<!-- content   -->
 	  
-		
+	<script language="javascript">
+	
+	var sel = document.getElementById("sub01");
+	var sel2 = document.getElementById("sub02");
+
+	for(i=0; i<sel.options.length; i++) {	
+		if(sel.options[i].value == <%=s1%>)
+			{
+			sel.options[i].selected=true;
+	        break;
+			}
+	}
+	
+	for(i=0; i<sel2.options.length; i++) {	
+		if(sel2.options[i].value == <%=s2%>)
+			{
+				sel2.options[i].selected=true;
+	        	break;
+			}
+	}
+</script>		
 	  <div style="float:left;padding:0px; margin:0px; width:100%;" id="viewPlans">
 	  	<div id="detail_title_cour" class="sotitle" style="padding-top: 6px;">공통</div>
 	

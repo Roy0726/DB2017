@@ -24,7 +24,7 @@ public class DB_Control {
 	{
 		ResultSet rs = null;
 		boolean flag = false;
-		String sql = "select * from test t where t.id='" + id + "' and t.passwd='" + passwd + "'";
+		String sql = "select * from login log where log.id='" + id + "' and log.passwd='" + passwd + "'";
 		try {
 			rs = stmt.executeQuery(sql);
 			rs.next();
@@ -43,13 +43,16 @@ public class DB_Control {
 	{
 		ResultSet rs = null;
 		String temp = "";
-		String sql = "select * from test";
+		String sql = "select * from login";
 		
-		if(check1 != null)
-			temp += "where id="+check1;
-		if(check2 != null)
-			temp += " passwd="+check2;
+//		if(check1 != null)
+//			temp += " where id= '"+check1 + "'";
+//		
+//		if(check2 != null)
+//			temp += " passwd="+check2;
 		try {
+//			sql += temp;
+//			System.out.println(sql);
 			rs = stmt.executeQuery(sql);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
