@@ -1,5 +1,7 @@
 <%@page import="DB.DB_Control"%>
 <%@ page language="java" import="java.sql.*"%>
+<%@ page import="syllabus.Syllabus" %>
+<%@ page import="java.util.ArrayList"%>
 <%
 	String c1 = request.getParameter("one");
 	String c2 = request.getParameter("two");
@@ -15,7 +17,8 @@
 	session.setAttribute("s1", s1);
 	session.setAttribute("s2", s2);
 	DB_Control db = (DB_Control) session.getAttribute("database");
-	ResultSet main_rs = db.getMainRs("computer", c1, c2, c3);
+	ArrayList<Syllabus> main_rs = db.getMainRs("computer", c1, c2, c3);
+	
 	session.setAttribute("main_rs", main_rs);
 	response.sendRedirect("main_view.jsp");
 %>

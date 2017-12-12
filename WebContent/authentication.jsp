@@ -1,4 +1,8 @@
+<%@page import="syllabus.Recommend"%>
+<%@page import="User.User" %>
 <%@page import="DB.DB_Control"%>
+<%@ page import="syllabus.Syllabus" %>
+<%@ page import="java.util.ArrayList"%>
 <%@ page language="java" import="java.sql.*"%>
 <%
 	DB_Control db = new DB_Control();
@@ -11,8 +15,15 @@
 	String redirectUrl = "Login.html"; // 인증 실패시 재요청 될 url
 	
 	if (login_check) {
+		User user = db.get_student_info(id);
+		user.setTaken(db.completed_lecture_num(id));
+		db.make_view(id);
+		ArrayList<Recommend> rec = db.getRecommendRs(id);
+		
+		session.setAttribute("rec", rec);
 		session.setAttribute("database", db);
 		session.setAttribute("signedUser", id); // 인증되었음 세션에 남김
+		session.setAttribute("user_info", user);
 		redirectUrl = "main_view.jsp";
 	}
 	else{
